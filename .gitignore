@@ -1,3 +1,6 @@
 
 api_keys.json
 mysql_config.json
+venv/
+.idea/
+.ipynb_checkpoints/
