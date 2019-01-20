@@ -92,7 +92,7 @@ listener = StreamListener(api=tweepy.API(wait_on_rate_limit=True))
 streamer = tweepy.Stream(auth=auth, listener=listener)
 
 if search_words:
-    print('Search tearms: {}'.format(search_words))
+    print('Search terms: {}'.format(search_words))
     streamer.filter(track=search_words, languages = ['en'])
 else:
     print('Your list of search terms is empty.')
