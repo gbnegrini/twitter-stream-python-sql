@@ -7,27 +7,21 @@ This is a Python script to stream tweets filtered by search terms from the Twitt
 
 First you need to setup your database. This was done using MySQL Workbench and the following commands to create a table:
 
-```CREATE TABLE `tweets` (
+```
 
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  
-  `username` varchar(255) DEFAULT NULL,
-  
-  `created_at` varchar(45) DEFAULT NULL,
-  
-  `tweet` text,
-  
-  `retweet_count` int(11) DEFAULT NULL,
-  
-  `location` varchar(100) DEFAULT NULL,
-  
-  `place` varchar(100) DEFAULT NULL,
-  
-  PRIMARY KEY (`id`),
-  
-  UNIQUE KEY `id_UNIQUE` (`id`)
-  
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ```
+CREATE TABLE `tweets` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`username` varchar(255) DEFAULT NULL,
+`created_at` varchar(45) DEFAULT NULL,
+`tweet` text,
+`retweet_count` int(11) DEFAULT NULL,
+`location` varchar(100) DEFAULT NULL,
+`place` varchar(100) DEFAULT NULL,
+PRIMARY KEY (`id`),
+UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci 
+
+```
 
 Here we are storing only the username, UTC time when tweet was created, the actual tweet text, retweet count, location and place. There are many other objects that can be obtained, as you can see [here](https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object.html).
 
