@@ -3,12 +3,12 @@ import json
 import mysql.connector
 from mysql.connector import errorcode
 
-# list of words to search
+# WRITE HERE YOUR LIST OF STRINGS TO BE SEARCHED
 search_words = []
 
 class StreamListener(tweepy.StreamListener):
 
-    '''This is a class provided by tweepy to access the Twitter Streaming API.'''
+    # This is a class provided by tweepy to access the Twitter Streaming API.
 
     def on_connect(self):
         print('Successfully connected to Twitter API.')
@@ -16,15 +16,16 @@ class StreamListener(tweepy.StreamListener):
     def on_error(self, status_code):
         if status_code != 200:
             print('An error has occurred')
-            return False # disconnects the stream
+            return False  # disconnects the stream
 
     def on_data(self, raw_data):
         try:
             data_json = json.loads(raw_data)
 
-            # extracts data from the json
+            # extracts data from the JSON
             # For more info on available attributes:
             # https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object.html
+
             if 'text' in data_json:
                 username = data_json['user']['screen_name']
                 created_at = data_json['created_at']
@@ -42,7 +43,7 @@ class StreamListener(tweepy.StreamListener):
                 connect_and_insert(username, created_at, tweet, retweet_count, place, location)
 
         except Exception as error:
-            print(error)
+            print('ERROR: {}'.format(error))
 
 
 def connect_and_insert(username, created_at, tweet, retweet_count, place , location):
@@ -64,18 +65,24 @@ def connect_and_insert(username, created_at, tweet, retweet_count, place , locat
         elif error.errno == errorcode.ER_BAD_DB_ERROR:
             print('Database not found')
         else:
-            print(error)
+            print('ERROR: {}'.format(error))
 
     finally:
         cursor.close()
         connect.close()
 
-# Opens as dictionaries the json files containing MySQL access parameters and Twitter API keys
-with open('api_keys.json', 'r') as file:
-    api_keys = json.loads(file.read())
+# Opens as dictionaries the JSON files containing MySQL access parameters and Twitter API keys
+try:
+    with open('api_keys.json', 'r') as file:
+        api_keys = json.loads(file.read())
+except FileNotFoundError:
+    print('ERROR: your JSON file containing the Twitter API keys was not found.')
 
-with open('mysql_config.json', 'r') as file:
-    mysql_config = json.loads(file.read())
+try:
+    with open('mysql_config.json', 'r') as file:
+        mysql_config = json.loads(file.read())
+except FileNotFoundError:
+    print('ERROR: your JSON file containing the MySQL access parameters was not found.')
 
 # API authentication
 auth = tweepy.OAuthHandler(api_keys['consumer_key'], api_keys['consumer_secret'])
@@ -84,5 +91,8 @@ auth.set_access_token(api_keys['access_token'], api_keys['access_token_secret'])
 listener = StreamListener(api=tweepy.API(wait_on_rate_limit=True))
 streamer = tweepy.Stream(auth=auth, listener=listener)
 
-print('Search tearms: {}'.format(search_words))
-streamer.filter(track=search_words, languages = ['en'])
+if search_words:
+    print('Search tearms: {}'.format(search_words))
+    streamer.filter(track=search_words, languages = ['en'])
+else:
+    print('Your list of search terms is empty.')

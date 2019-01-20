@@ -1,7 +1,7 @@
-# saves the API keys and the MySQL connection configurations as JSON files
-
 import json
 
+# Write here your Twitter API keys
+# More info: https://developer.twitter.com/en/docs/basics/apps/overview
 api_keys = {
     'consumer_key': 'API KEY',
     'consumer_secret': 'API SECRET KEY',
@@ -9,6 +9,7 @@ api_keys = {
     'access_token_secret': 'ACCESS TOKEN SECRET'
 }
 
+# Write here your MySQL access parameters
 my_sql_config = {
     'user': 'YOUR USER',
     'password': 'YOUR PASSWORD',
