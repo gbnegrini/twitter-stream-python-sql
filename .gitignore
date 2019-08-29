@@ -1,7 +1,2 @@
-
-api_keys.json
-mysql_config.json
-venv/
-.idea/
-.ipynb_checkpoints/
-stream_tweets_personal.py
+*.json
+.gitattributes

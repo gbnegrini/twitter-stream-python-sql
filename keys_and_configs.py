@@ -17,13 +17,28 @@ my_sql_config = {
     'database': 'YOUR DATABASE'
 }
 
-json_keys = json.dumps(api_keys)
-file = open("api_keys.json", "w")
-file.write(json_keys)
+# Write here your search parameters as a list
+    # English: 'en'
+    # Portuguese: 'pt'
+search = {
+    'words': ['YOUR', 'SEARCH', 'TERMS'],
+    'languages': ['WHICH', 'LANGUAGES']
+}
 
-json_config = json.dumps(my_sql_config)
-file = open("mysql_config.json", "w")
-file.write(json_config)
+if __name__ == '__main__':
+    try:
+        json_keys = json.dumps(api_keys)
+        with open("api_keys.json", "w") as file:
+            file.write(json_keys)
 
-file.close()
+        json_config = json.dumps(my_sql_config)
+        with open("mysql_config.json", "w") as file:
+            file.write(json_config)
 
+        json_search = json.dumps(search)
+        with open("search.json", "w") as file:
+            file.write(json_search)
+
+        print('Keys and configs written!')
+    except:
+        print('Oops, something went wrong!')
