@@ -1,37 +1,36 @@
-# Streaming tweets with Python and storing data into a MySQL database 
+# Streaming tweets with Python and storing data into a MySQL database
 
-This is a Python script to stream tweets filtered by search terms from the Twitter API and store that data into a MySQL database.
+This is a Python script to stream tweets with [Tweepy](https://tweepy.readthedocs.io/en/latest/) and store some Tweet and User attributes into a MySQL database.
 
-## Getting Started
-- Database
+## Prerequisites
+### Database
 
-First you need to setup your database. This was done using MySQL Workbench and the following commands to create a table:
+First you need to setup your database. You can easily install [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) and then run the SQL script file (```twitter_ddl.sql```) to create all tables.
 
+### Credentials
+
+To obtain your Twitter API keys follow these [instructions](https://developer.twitter.com/en/docs/basics/apps/overview).
+
+### Dependencies
+ - tweepy
+ - json
+ - mysql-connector-python
+ 
+ You can use the following command to create a conda environment (twitter-sql) and install all dependencies:
+ ```bash
+ $ conda env create -f environment.yaml
+ $ conda activate twitter-sql
+ ```
+ 
+ ## How to use
+ ### Streaming and storing
+Use your favorite text editor to open and edit the ```keys_and_configs.py``` file. You need to write your own Twitter API credentials and MySQL access parameters in this file. There you also need to write your search parameters like search terms and language.
+Once you edited this file you must run it to generate the files that ```stream_tweets.py``` will need.
+```bash
+$ python keys_and_configs.py
 ```
 
-CREATE TABLE `tweets` (
-`id` int(11) NOT NULL AUTO_INCREMENT,
-`username` varchar(255) DEFAULT NULL,
-`created_at` varchar(45) DEFAULT NULL,
-`tweet` text,
-`retweet_count` int(11) DEFAULT NULL,
-`location` varchar(100) DEFAULT NULL,
-`place` varchar(100) DEFAULT NULL,
-PRIMARY KEY (`id`),
-UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci 
-
+With all configurations set you can finally run ```stream_tweets.py``` to start streaming and storing the tweets:
+```bash
+$ python stream_tweets.py
 ```
-
-Here we are storing only the username, UTC time when tweet was created, the actual tweet text, retweet count, location and place. There are many other objects that can be obtained, as you can see [here](https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object.html).
-
-- Credentials
-
-You will also need to save your MySQL connection parameters and your Twitter API keys as JSON files.
-To obtain your API keys follow these [instructions](https://developer.twitter.com/en/docs/basics/apps/overview).
-Having all these information in hand you can edit and run the `keys_and_configs.py` file to generate the needed JSON files.
-
-## Streaming tweets
-
-- Edit the `stream_tweets.py` file (line 7) and write the words or hashtags you would like to search.
-- Save and run the script. Tweets should be streamed and saved into your database.
