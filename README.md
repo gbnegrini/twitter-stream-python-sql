@@ -5,7 +5,7 @@ This is a Python script to stream tweets with [Tweepy](https://tweepy.readthedoc
 ## Prerequisites
 ### Database
 
-First you need to setup your database. You can easily install [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) and then run the SQL script file (```twitter_ddl.sql```) to create all tables.
+First you need to se tup your database. You can easily install [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) and then run the SQL script file (```twitter_ddl.sql```) to create all tables.
 
 ### Credentials
 
@@ -24,8 +24,8 @@ To obtain your Twitter API keys follow these [instructions](https://developer.tw
  
  ## How to use
  ### Streaming and storing
-Use your favorite text editor to open and edit the ```keys_and_configs.py``` file. You need to write your own Twitter API credentials and MySQL access parameters in this file. There you also need to write your search parameters like search terms and language.
-Once you edited this file you must run it to generate the files that ```stream_tweets.py``` will need.
+Use your favorite text editor to open and edit the ```keys_and_configs.py``` file. You need to write your own Twitter API credentials and MySQL access parameters in this file. There you will also need to write your search parameters like search terms and language.
+Once you have edited this file you must run it to generate the files that ```stream_tweets.py``` will need.
 ```bash
 $ python keys_and_configs.py
 ```
