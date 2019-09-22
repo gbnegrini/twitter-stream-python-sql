@@ -5,7 +5,7 @@ This is a Python script to stream tweets with [Tweepy](https://tweepy.readthedoc
 ## Prerequisites
 ### Database
 
-First you need to se tup your database. You can easily install [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) and then run the SQL script file (```twitter_ddl.sql```) to create all tables.
+First you need to set up your database. You can easily install [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) and then run the SQL script file (```twitter_ddl.sql```) to create all tables.
 
 ### Credentials
 
